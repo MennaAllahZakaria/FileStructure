@@ -12,7 +12,7 @@ class student{
 };
 string path_student="D:\\data.txt";
 
-void delete_record(){
+void delete_student(){
 fstream f;
 
 f.open(path_student,ios::in|ios::out);
@@ -46,6 +46,6 @@ f.close();
 
 
 int main(){
-delte_student();
+ delete_student()
   return 0;
 }
