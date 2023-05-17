@@ -1,11 +1,13 @@
  #        اللهم لا سهل الا ما جعلته سهلا و انت تجعل الصعب ان شئت سهل        
 
 # write your passes 
+
 pass_student="D:\\student_python.txt"
 pass_teacher="D:\\teacher_python.txt"
 pass_temp="D:\\temp.txt"
 grade=["General","Bioinformatics","Software Engineering" ,"Computer science","Information System"]
 
+#------------------------------------------------------------------------------------             
 # To transfer data between two files 
 def trans( pass1 , pass2):
     file=open(pass1,'r')
@@ -18,8 +20,9 @@ def trans( pass1 , pass2):
     file2.close()
         
          
-
-
+ #------------------------------------------------------------------------------------             
+ # to print the grades
+ 
 def print_grades():
      print('----------------------Departments----------------------')
      for i in range(len(grade)):
@@ -28,6 +31,7 @@ def print_grades():
 
    #------------------------------------------------------------------------------------              
    # To add new student record
+   
 def addStudent():
     with open(pass_student, 'a') as file:
         c='y'
@@ -51,7 +55,7 @@ def addStudent():
         print('All Records were Added\n')
         
   #------------------------------------------------------------------------------------                      
-# To delete student from data            
+  # To delete student from data            
 def deletestudent():
     import os
     name=input("Please enter the name to delete this student    \n ")
@@ -88,7 +92,10 @@ def vaildstudent():
             return True
     print("NOT VALID \n")
     return False
+   
+    #------------------------------------------------------------------------------------  
    # to view the infotmation of one student    
+   
 def view_one_student():
     file=open(pass_student,"r")
     name=input("Enter the name       \n")
@@ -105,7 +112,7 @@ def view_one_student():
     print("That student is not found\n")
   
     #------------------------------------------------------------------------------------                
-   # to view the infotmation of all students               
+    # to view the infotmation of all students               
 def view_all_students():
     file=open(pass_student,"r")
     i=1
@@ -121,7 +128,7 @@ def view_all_students():
         i=i+1
         
      #------------------------------------------------------------------------------------                   
-   # to update the information of student        
+     # to update the information of student        
 def update_student():
         import os
         name_search=input("Enter the name of the record\n")
@@ -169,7 +176,7 @@ def update_student():
             print("UPDATED\n")  
    
      #------------------------------------------------------------------------------------              
-    # to update the password of student              
+     # to update the password of student              
             
 def update_student_password():
         import os
@@ -198,7 +205,7 @@ def update_student_password():
             print("UPDATED\n")  
   
     #------------------------------------------------------------------------------------               
-          # to search student an know he/she in which record  
+    # to search student an know he/she in which record  
 def search_student():
         import os
         name_search=input("Enter the name of the record\n")
@@ -211,7 +218,7 @@ def search_student():
                 file.close()
                 return
             i+=1
-   
+        print("No Such student in our data     SORRY :( ")
    
   #------------------------------------------------------------------------------------              
   # these functions only the student can access          
@@ -240,7 +247,7 @@ def do_student():
             
             
  # ===================================TEACHER============================================    
- 
+
  # To add new teacher record        
 def addTeacher():
     with open(pass_teacher, 'a') as file:
@@ -289,7 +296,7 @@ def deleteteacher():
        print("THIS TEACHER IS NOT VALID \n")           
   
  #------------------------------------------------------------------------------------                        
-  # to checks if the teacher is in our data or not              
+ # to checks if the teacher is in our data or not              
 def vaildteacher():
     file=open(pass_teacher,"r")
     name=input("Enter the name       \n ")
@@ -304,7 +311,7 @@ def vaildteacher():
 
 
   #------------------------------------------------------------------------------------              
-    # to view the infotmation of one teacher 
+  # to view the infotmation of one teacher 
          
                 
 def view_one_teacher():
@@ -341,7 +348,7 @@ def view_all_teacher():
         print("_____________________________________________")
         i=i+1
  #------------------------------------------------------------------------------------                       
-     # to update the information of teacher
+ # to update the information of teacher
  
            
 def update_teacher():
@@ -390,7 +397,7 @@ def update_teacher():
             
              
     #------------------------------------------------------------------------------------              
-      # to update the password of teacher              
+    # to update the password of teacher              
            
             
 def update_teacher_password():
@@ -420,7 +427,7 @@ def update_teacher_password():
             print("UPDATED\n")  
   
     #------------------------------------------------------------------------------------              
-     # to search teacher an know he/she in which record               
+    # to search teacher an know he/she in which record               
    
          
 def search_teacher():
@@ -435,9 +442,10 @@ def search_teacher():
                 file.close()
                 return
             i+=1
-     
+         print("No Such teatcher in our data     SORRY :( ")
    #------------------------------------------------------------------------------------                   
-   # these functions only the teacher can access            
+   # these functions only the teacher can access     
+   
 def do_teacher():
     c='y'
     while c=='y':
@@ -480,7 +488,8 @@ def do_teacher():
              deletestudent()                                    
          c=input("Do you to countinue ...... y//n \n")        
             
- 
+ #----------------------------------------------------------------------------------------------------------------------------------
+ # The main Function
 
 def main():
 
