@@ -28,22 +28,54 @@ bool subject[7];
 
 vector<string> grade={"General","Bioinformatics","Software Engineering" ,"Computer science","Information System"};
 
-string pass_student="D:\\student.txt";
-string pass_teacher="D:\\teacher.txt";
+//write your passes
+
+string pass_student="D:\\AAyear 2\\Second Semester\\File Structure\\codes\\project\\student.txt";
+string pass_teacher="D:\\AAyear 2\\Second Semester\\File Structure\\codes\\project\\teacher.txt";
+
+// To print Grades
+
+void PrintGrades(){
+  for ( int i=0;i<grade.size();i++){
+    cout<<i+1<<" - "<<grade[i]<<nl;
+  }
+}
+
 
 
 //=============================================functions of student==================================================//
 
+//-------------------------------------------------------------------
+//To check if that name is in our data or not
+
+bool InOurDataStudent(string name){
+      fstream f;
+    student s;
+
+f.open(pass_student,ios::in);
+while ( !f.eof()){
+ f.read((char *)&s,sizeof (s));
+
+ if ( name==s.name) return true;
+
+ }
+ return false;
+}
+//-------------------------------------------------------------------
+//To add new student in our data
 
 void add_student(){
     fstream f;
-student s;
+    student s;
 
 f.open(pass_student,ios::app);
 
-
     cout<<"please enter student name"<<nl;
   cin >> s.name;
+  while ( InOurDataStudent(s.name)){
+    cout<<"Name already exists. Please enter a different Name."<<nl;
+    cin>>s.name;
+  }
   cout<<"please enter student password"<<nl;
   cin >> s.password;
    cout<<"please enter student phone"<<nl;
@@ -60,11 +92,7 @@ f.open(pass_student,ios::app);
  do{
   cout<<"------------GRADES------------"<<nl;
 
-  cout<<"1 - General"<<nl;
-  cout<<"2 - Bioinformatics"<<nl;
-  cout<<"3 - Software Engineering" <<nl;
-  cout<<"4 - Computer science"<<nl;
-  cout<<"5 - Information System"<<nl;
+PrintGrades();
   cout<<"please enter the choice of Departments"<<nl;
 
 cin >> i;
@@ -81,7 +109,8 @@ f.write((char *)&s,sizeof (s));
 
 f.close();
 }
-
+//-------------------------------------------------------------------
+//To check if student in our data and if he/she exist tell us he/she in which line
 
 void search_student(){
 fstream f;
@@ -103,6 +132,9 @@ cout<<"Sorry the student is not found"<<nl;
 f.close();
 }
 
+//-------------------------------------------------------------------
+//To check if that name and pass is valid in our data or not
+
 bool valid_student(){
     fstream f;
     student s;
@@ -119,6 +151,8 @@ if ( strcmp(name,s.name)==0 && strcmp(pass,s.password)==0) return 1;
 return 0;
 
 }
+//-------------------------------------------------------------------
+//To view one student
 
 void view_one_student(){
 fstream f;
@@ -149,6 +183,8 @@ f.open(pass_student,ios::in);
 
 }
 
+//-------------------------------------------------------------------
+//To view all students
 
 void view_all_students(){
 fstream f,o;
@@ -177,7 +213,8 @@ f.open(pass_student,ios::in);
  
 }
 
-
+//-------------------------------------------------------------------
+//To update student info
 
 void update_student_info(){
 fstream f;
@@ -234,12 +271,7 @@ if (strcmp(name,s.name)==0&& strcmp(password,s.password)==0){
        cout<<"Please enter the new department"<<nl;
       
   cout<<"------------GRADES------------"<<nl;
-
-  cout<<"1 - General"<<nl;
-  cout<<"2 - Bioinformatics"<<nl;
-  cout<<"3 - Software Engineering" <<nl;
-  cout<<"4 - Computer science"<<nl;
-  cout<<"5 - Information System"<<nl;
+   PrintGrades();
   cout<<"please enter the choice of Departments"<<nl;
 
       cin >> idx;
@@ -272,6 +304,8 @@ cout<<"Sorry the student is not found"<<nl;
 f.close();
 }
 
+//-------------------------------------------------------------------
+//To update student password
 
 void update_student_password(){
 fstream f;
@@ -307,6 +341,9 @@ if (strcmp(name,s.name)==0&& strcmp(password,s.password)==0){
 f.close();
 }
 
+//-------------------------------------------------------------------
+//To copy data between to files
+
 void copy_data(string pass1,string pass2){
 
 fstream f,o;
@@ -323,6 +360,8 @@ f.close();
 o.close();
 
 }
+//-------------------------------------------------------------------
+//To Delete student
 
 void delete_student(){
 
@@ -357,6 +396,9 @@ if (is)copy_data("temp.txt",pass_student);
 
 
 }
+//-------------------------------------------------------------------
+//To Add values to student
+
 
 void add_values(){
     fstream f;
@@ -390,6 +432,10 @@ s.subject[i]=(j==1?true:false);
 
 
 }
+
+//-------------------------------------------------------------------
+//To read the values of student
+
 void read_values(){
 
 
@@ -413,7 +459,8 @@ while (  f.read((char *)&s,sizeof (s))){
     }
 
 }
-
+//-------------------------------------------------------------------
+//That functions the the student can access
 
 void student_do(){
 
@@ -468,7 +515,26 @@ cin>>c;
 
 //============================================functions of teachar=============================================//
 
+//-------------------------------------------------------------------
+//To check if that name is in our data or not
 
+bool InOurDataTeacher(string name){
+      fstream f;
+    teacher t;
+
+f.open(pass_teacher,ios::in);
+
+while ( !f.eof()){
+ f.read((char *)&t,sizeof (t));
+
+ if ( name==t.name) return true;
+
+ }
+ return false;
+}
+
+//-------------------------------------------------------------------
+//To add new teacher in our data
 
 void add_teacher(){
     fstream f;
@@ -478,7 +544,11 @@ f.open(pass_teacher,ios::app);
 
 
     cout<<"please enter teacher name"<<nl;
-  cin >> t.name;
+    cin >> t.name;
+  while (InOurDataTeacher(t.name)){
+    cout<<"Name already exists. Please enter a different Name."<<nl;
+    cin>>t.name;
+  }
   cout<<"please enter teacher password"<<nl;
   cin >> t.password;
    cout<<"please enter teacher phone"<<nl;
@@ -493,11 +563,7 @@ f.open(pass_teacher,ios::app);
  do{
   cout<<"------------DEPATRMENTS------------"<<nl;
 
-  cout<<"1 - General"<<nl;
-  cout<<"2 - Bioinformatics"<<nl;
-  cout<<"3 - Software Engineering" <<nl;
-  cout<<"4 - Computer science"<<nl;
-  cout<<"5 - Information System"<<nl;
+  PrintGrades();
   cout<<"please enter the choice of Departments"<<nl;
 
 cin >> i;
@@ -514,6 +580,8 @@ f.write((char *)&t,sizeof (t));
 f.close();
 }
 
+//-------------------------------------------------------------------
+//To check if teacher in our data and if he/she exist tell us he/she in which line
 
 void search_teacher(){
 fstream f;
@@ -535,6 +603,9 @@ cout<<"Sorry the teacher is not found"<<nl;
 f.close();
 }
 
+//-------------------------------------------------------------------
+//To check if that name and pass is valid in our data or not
+
 bool valid_teacher(){
     fstream f;
     teacher t;;
@@ -552,6 +623,8 @@ return 0;
 
 }
 
+//-------------------------------------------------------------------
+//To view one teacher
 
 void view_one_teacher(){
 fstream f;
@@ -581,10 +654,8 @@ f.open(pass_teacher,ios::in);
 
 }
 
-
-
-
-
+//-------------------------------------------------------------------
+//To view all teachers
 
 void view_all_teachers(){
 fstream f;
@@ -611,8 +682,8 @@ f.open(pass_teacher,ios::in);
  
 }
 
-
-
+//-------------------------------------------------------------------
+//To update tetcher info
 
 void update_teacher_info(){
 fstream f;
@@ -665,11 +736,7 @@ if (strcmp(name,t.name)==0&& strcmp(password,t.password)==0){
       
   cout<<"------------GRADES------------"<<nl;
 
-  cout<<"1 - General"<<nl;
-  cout<<"2 - Bioinformatics"<<nl;
-  cout<<"3 - Software Engineering" <<nl;
-  cout<<"4 - Computer science"<<nl;
-  cout<<"5 - Information System"<<nl;
+  PrintGrades();
   cout<<"please enter the choice of Departments"<<nl;
 
       cin >> idx;
@@ -701,7 +768,8 @@ cout<<"Sorry the teacher is not found"<<nl;
 f.close();
 }
 
-
+//-------------------------------------------------------------------
+//To update tetcher password
 
 void update_teacher_password(){
 fstream f;
@@ -737,6 +805,8 @@ if (strcmp(name,t.name)==0&& strcmp(password,t.password)==0){
 f.close();
 }
 
+//-------------------------------------------------------------------
+//To copy data between to files
 
 void copy_data_teacher(string pass1,string pass2){
 
@@ -754,6 +824,8 @@ f.close();
 o.close();
 
 }
+//-------------------------------------------------------------------
+//To Delete teacher
 
 void delete_teacher(){
 
@@ -791,6 +863,8 @@ if (is)copy_data_teacher("temp2.txt",pass_teacher);
 
 }
 
+//-------------------------------------------------------------------
+//That functions the the teacher can access
 
 void teacher_do(){
 
@@ -877,7 +951,11 @@ int ch;
 cout<<"TEACHER        enter  1 "<<nl;
 cout<<"STUDENT        enter  2 "<<nl;
 cin >>ch;
+
 if ( ch==1){
+  char moreOperation ='y';
+  while (moreOperation=='y'){
+
   cout<<"SIGN UP     1 "<<nl;
   cout<<"SIGN IN     2 "<<nl;
   int i=1;
@@ -891,14 +969,25 @@ if ( ch==1){
   }else{
     add_teacher();
   }
+  cout<<"Are you want anther operation in teacher (y//n) "<<nl;
+  cin >>moreOperation;
+  }
 
 }
 else {
+  char moreOperation ='y';
+  while (moreOperation=='y')
+  {
+    
+  
+  
+
   cout<<"SIGN UP     1 "<<nl;
   cout<<"SIGN IN     2 "<<nl;
   int i=1;
   cin >>i;
   if ( i==2){
+
  if (valid_student()) 
        student_do();
      else 
@@ -907,7 +996,9 @@ else {
     add_student();
   }
     
-
+  }
+  cout<<"Are you want anther operation in student (y//n) "<<nl;
+  cin >>moreOperation;
 }
 cout<<"Do you want to continue   y/n"<<nl;
 cin >>c;
