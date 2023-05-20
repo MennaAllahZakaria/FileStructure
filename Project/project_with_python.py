@@ -1,14 +1,13 @@
  #        اللهم لا سهل الا ما جعلته سهلا و انت تجعل الصعب ان شئت سهل        
-
 # write your passes 
-
-pass_student="D:\\student_python.txt"
-pass_teacher="D:\\teacher_python.txt"
-pass_temp="D:\\temp.txt"
+pass_student="D:\\AAyear 2\\Second Semester\\File Structure\\codes\\project\\student_python.txt"
+pass_teacher="D:\\AAyear 2\\Second Semester\\File Structure\\codes\\project\\teacher_python.txt"
+pass_temp="D:\\AAyear 2\\Second Semester\\File Structure\\codes\\project\\temp.txt"
 grade=["General","Bioinformatics","Software Engineering" ,"Computer science","Information System"]
 
 #------------------------------------------------------------------------------------             
 # To transfer data between two files 
+
 def trans( pass1 , pass2):
     file=open(pass1,'r')
     file2=open(pass2,'w')
@@ -18,29 +17,43 @@ def trans( pass1 , pass2):
         
     file.close()
     file2.close()
-        
-         
- #------------------------------------------------------------------------------------             
- # to print the grades
+#------------------------------------------------------------------------------------             
+# To Check if that name is in our data or not    
+
+def InOurData(name,pas):
+     file=open(pas,'r')
+     for line in file:
+        s=line.split('\t')
+        if name==s[0]:
+            return True 
+     return False
  
+  #------------------------------------------------------------------------------------             
+  # to print the grades   
+    
 def print_grades():
      print('----------------------Departments----------------------')
      for i in range(len(grade)):
          print(str(i+1)+"  "+grade[i])
      print("--------------------------------------------------------")
-
+     
    #------------------------------------------------------------------------------------              
    # To add new student record
-   
 def addStudent():
     with open(pass_student, 'a') as file:
+        
         c='y'
         while c=='y':
-            name = input('Enter The student name: ')
-            password = input('Enter The student password: ')
-            phone = input('Enter The student phone: ')
-            age = input('Enter The student age: ')
-            year = input('Enter The student year: ')
+            
+            name = input('Enter The student name:  ->')
+            while InOurData(name,pass_student)==True :
+                print("Name already exists. Please enter a different Name.")
+                name = input('Enter The student name: ->')
+            password = input('Enter The student password:   ->')
+            
+            phone = input('Enter The student phone: ->')
+            age = input('Enter The student age: ->')
+            year = input('Enter The student year: ->')
             
             i=-1
             while i==-1:
@@ -55,7 +68,8 @@ def addStudent():
         print('All Records were Added\n')
         
   #------------------------------------------------------------------------------------                      
-  # To delete student from data            
+  # To delete student from data   
+           
 def deletestudent():
     import os
     name=input("Please enter the name to delete this student    \n ")
@@ -80,7 +94,8 @@ def deletestudent():
        
                  
   #------------------------------------------------------------------------------------                
-  # to checks if the student is in our data or not             
+  # to checks if the student is in our data or not 
+             
 def vaildstudent():
     file=open(pass_student,"r")
     name=input("Enter the name    \n")
@@ -92,10 +107,8 @@ def vaildstudent():
             return True
     print("NOT VALID \n")
     return False
-   
-    #------------------------------------------------------------------------------------  
-   # to view the infotmation of one student    
-   
+  #------------------------------------------------------------------------------------                
+  # to view the infotmation of one student    
 def view_one_student():
     file=open(pass_student,"r")
     name=input("Enter the name       \n")
@@ -127,8 +140,9 @@ def view_all_students():
         print("===================================================================")
         i=i+1
         
-     #------------------------------------------------------------------------------------                   
-     # to update the information of student        
+   #------------------------------------------------------------------------------------                   
+   # to update the information of student 
+          
 def update_student():
         import os
         name_search=input("Enter the name of the record\n")
@@ -205,7 +219,8 @@ def update_student_password():
             print("UPDATED\n")  
   
     #------------------------------------------------------------------------------------               
-    # to search student an know he/she in which record  
+    # to search student an know he/she in which record 
+     
 def search_student():
         import os
         name_search=input("Enter the name of the record\n")
@@ -219,7 +234,7 @@ def search_student():
                 return
             i+=1
         print("No Such student in our data     SORRY :( ")
-   
+         
   #------------------------------------------------------------------------------------              
   # these functions only the student can access          
             
@@ -247,13 +262,17 @@ def do_student():
             
             
  # ===================================TEACHER============================================    
-
+ 
  # To add new teacher record        
 def addTeacher():
     with open(pass_teacher, 'a') as file:
+    
         c='y'
         while c=='y':
             name = input('Enter The Teacher name:    ->')
+            while InOurData(name,pass_teacher)==True :
+                print("Name already exists. Please enter a different Name.")
+                name = input('Enter The teacher name: ->')
             password = input('Enter The Teacher password:   -> ')
             phone = input('Enter The Teacher phone: ->')
             age = input('Enter The Teacher age: ->')
@@ -442,10 +461,9 @@ def search_teacher():
                 file.close()
                 return
             i+=1
-         print("No Such teatcher in our data     SORRY :( ")
+        print("No Such teacher in our data     SORRY :( ")
    #------------------------------------------------------------------------------------                   
-   # these functions only the teacher can access     
-   
+   # these functions only the teacher can access            
 def do_teacher():
     c='y'
     while c=='y':
@@ -460,8 +478,6 @@ def do_teacher():
          print("9- view one student")
          print("10- view all students")
          print("11- delete student")
-
-
 
          i=int(input("Please enter your choice\n"))
          if i==1:
@@ -488,8 +504,7 @@ def do_teacher():
              deletestudent()                                    
          c=input("Do you to countinue ...... y//n \n")        
             
- #----------------------------------------------------------------------------------------------------------------------------------
- # The main Function
+ 
 
 def main():
 
@@ -519,7 +534,7 @@ def main():
 
 
     else :
-        print("SIGN UP     1 \n")
+        print("SIGN UP     1 ")
         print("SIGN IN     2 \n")
         i=int(input())
         
